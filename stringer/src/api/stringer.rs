@@ -20,3 +20,13 @@ fn inspect_numbers(input: &String) -> i32 {
 
     count
 }
+
+pub fn is_palindrome(input: &String) -> bool {
+    let reversed_input: String = input.chars().rev().collect();
+
+    if *input == reversed_input {
+        true
+    } else {
+        false
+    }
+}

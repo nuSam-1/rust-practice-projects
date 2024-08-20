@@ -33,6 +33,22 @@ fn main() {
                 }
             }
         }
+        Some(Commands::Palindrome(name)) => {
+            match name.string {
+                Some (ref _name) => {
+                    let is_palindrome = api::stringer::is_palindrome(_name);
+
+                    if is_palindrome {
+                        println!("{:?} is a palindrome.", _name);
+                    } else {
+                        println!("{:?} is not a palindrome.", _name);
+                    }
+                }
+                None => {
+                    println!("Please provide a string to reverse");
+                }
+            }
+        }
         None => {}
     }
 }
@@ -48,7 +64,8 @@ struct Cli {
 #[derive(Subcommand)]
 enum Commands {
     Reverse(Reverse),
-    Inspect(Inspect)
+    Inspect(Inspect),
+    Palindrome(Palindrome)
 }
 
 /// Reverse a string
@@ -68,3 +85,9 @@ struct Inspect {
     only_digits: bool
 }
 
+/// Check if a string is a palindrome
+#[derive(Args)]
+struct Palindrome {
+    /// The string to inspect
+    string: Option<String>
+}
